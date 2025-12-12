@@ -71,6 +71,25 @@ const Index = () => {
         <div className="absolute top-40 right-20 w-80 h-80 bg-neon-magenta/20 rounded-full blur-[120px] smoke-animation" style={{ animationDelay: '3s' }} />
         <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-neon-purple/20 rounded-full blur-[120px] smoke-animation" style={{ animationDelay: '6s' }} />
         <div className="absolute bottom-40 right-1/4 w-64 h-64 bg-neon-cyan/15 rounded-full blur-[100px] smoke-animation" style={{ animationDelay: '9s' }} />
+        
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={`smoke-${i}`}
+            className="smoke-particle absolute w-64 h-64 bg-white/5 rounded-full blur-[80px]"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDuration: `${15 + Math.random() * 10}s`,
+              animationDelay: `${Math.random() * 10}s`
+            }}
+          />
+        ))}
+
+        <div className="absolute top-0 left-1/4 w-1 h-full bg-gradient-to-b from-transparent via-neon-cyan/40 to-transparent neon-line" style={{ animationDelay: '0s' }} />
+        <div className="absolute top-0 right-1/3 w-1 h-full bg-gradient-to-b from-transparent via-neon-magenta/40 to-transparent neon-line" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-0 left-2/3 w-1 h-full bg-gradient-to-b from-transparent via-neon-purple/40 to-transparent neon-line" style={{ animationDelay: '2s' }} />
+        
+        <div className="absolute top-1/3 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon-cyan/30 to-transparent neon-line" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute bottom-1/4 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon-magenta/30 to-transparent neon-line" style={{ animationDelay: '1.5s' }} />
       </div>
 
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'}`}>
