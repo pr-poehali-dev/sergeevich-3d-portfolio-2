@@ -8,6 +8,7 @@ import Icon from '@/components/ui/icon';
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<{url: string; title: string; category: string} | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,7 +144,11 @@ const Index = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolio.map((item) => (
-              <Card key={item.id} className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-neon-cyan/30 hover:border-neon-magenta hover:shadow-2xl hover:shadow-neon-magenta/30 transition-all duration-500 cursor-pointer hover:scale-105">
+              <Card 
+                key={item.id} 
+                onClick={() => setSelectedImage({url: item.image, title: item.title, category: item.category})}
+                className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-neon-cyan/30 hover:border-neon-magenta hover:shadow-2xl hover:shadow-neon-magenta/30 transition-all duration-500 cursor-pointer hover:scale-105"
+              >
                 <div className="aspect-video overflow-hidden relative">
                   <img
                     src={item.image}
@@ -313,6 +318,33 @@ const Index = () => {
       <footer className="py-8 text-center text-gray-500 relative z-10">
         <p>&copy; 2024 SERGEEVICH. All rights reserved.</p>
       </footer>
+
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-lg flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-6 right-6 p-3 bg-neon-magenta/20 hover:bg-neon-magenta/40 border border-neon-magenta rounded-lg transition-all duration-300 hover:scale-110 neon-border group"
+          >
+            <Icon name="X" size={28} className="text-neon-magenta group-hover:rotate-90 transition-transform duration-300" />
+          </button>
+          <div className="max-w-7xl w-full animate-scale-in" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-6 text-center">
+              <span className="text-neon-magenta text-sm uppercase tracking-widest neon-glow">{selectedImage.category}</span>
+              <h3 className="text-4xl font-bold gradient-text mt-2">{selectedImage.title}</h3>
+            </div>
+            <div className="relative rounded-lg overflow-hidden border-2 border-neon-cyan/50 shadow-2xl shadow-neon-cyan/30">
+              <img
+                src={selectedImage.url}
+                alt={selectedImage.title}
+                className="w-full h-auto max-h-[80vh] object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
