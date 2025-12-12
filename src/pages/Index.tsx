@@ -30,18 +30,24 @@ const Index = () => {
       id: 1,
       title: 'Luxury Residential Complex',
       category: 'Exterior',
+      description: 'Современный жилой комплекс премиум-класса с панорамным остеклением',
+      details: '3ds Max, V-Ray, Photoshop',
       image: 'https://cdn.poehali.dev/projects/b8212f2e-bfd7-4fbd-be4d-2bd09e145690/files/e082c8b1-3d9d-45c1-b425-1e195cb3b439.jpg'
     },
     {
       id: 2,
       title: 'Modern Apartment Interior',
       category: 'Interior',
+      description: 'Минималистичный интерьер с акцентом на натуральные материалы',
+      details: 'Corona Renderer, 3ds Max',
       image: 'https://cdn.poehali.dev/projects/b8212f2e-bfd7-4fbd-be4d-2bd09e145690/files/834d2175-3e6d-42d1-8a51-5b27e06a3ac0.jpg'
     },
     {
       id: 3,
       title: 'Commercial Office Building',
       category: 'Exterior',
+      description: 'Офисный центр класса А с современной архитектурой',
+      details: 'V-Ray, SketchUp, Photoshop',
       image: 'https://cdn.poehali.dev/projects/b8212f2e-bfd7-4fbd-be4d-2bd09e145690/files/9814d9a3-99f1-41a9-b962-d18e650b98a1.jpg'
     }
   ];
@@ -137,17 +143,22 @@ const Index = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolio.map((item) => (
-              <Card key={item.id} className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-neon-cyan/30 hover:border-neon-cyan transition-all duration-500 cursor-pointer">
-                <div className="aspect-video overflow-hidden">
+              <Card key={item.id} className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-neon-cyan/30 hover:border-neon-magenta hover:shadow-2xl hover:shadow-neon-magenta/30 transition-all duration-500 cursor-pointer hover:scale-105">
+                <div className="aspect-video overflow-hidden relative">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125 group-hover:rotate-2"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neon-magenta/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  <span className="text-neon-magenta text-sm uppercase tracking-wider mb-2">{item.category}</span>
-                  <h3 className="text-2xl font-bold text-white">{item.title}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <span className="text-neon-magenta text-xs uppercase tracking-widest mb-2 block neon-glow">{item.category}</span>
+                    <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
+                    <p className="text-gray-300 text-sm mb-2 leading-relaxed">{item.description}</p>
+                    <p className="text-neon-cyan text-xs uppercase tracking-wide">{item.details}</p>
+                  </div>
                 </div>
               </Card>
             ))}
@@ -201,56 +212,101 @@ const Index = () => {
       </section>
 
       <section id="contact" className="min-h-screen py-20 relative z-10">
-        <div className="container mx-auto px-6 max-w-2xl">
+        <div className="container mx-auto px-6 max-w-5xl">
           <h2 className="text-5xl md:text-6xl font-bold text-center mb-16 gradient-text">
             Контакты
           </h2>
-          <Card className="bg-card/50 backdrop-blur-sm border-neon-purple/30 p-12">
-            <form className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium mb-2 text-neon-cyan">Ваше имя</label>
-                <Input
-                  type="text"
-                  placeholder="Иван Иванов"
-                  className="bg-black/50 border-neon-cyan/30 focus:border-neon-cyan text-white placeholder:text-gray-500"
-                />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <Card className="bg-gradient-to-br from-neon-cyan/10 via-card/50 to-neon-purple/10 backdrop-blur-sm border-neon-cyan/50 p-8 hover:border-neon-magenta transition-all duration-500 hover:shadow-2xl hover:shadow-neon-cyan/30">
+              <h3 className="text-3xl font-bold mb-6 gradient-text">Свяжитесь со мной</h3>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4 group hover:translate-x-2 transition-transform duration-300">
+                  <div className="p-3 bg-neon-cyan/20 rounded-lg border border-neon-cyan/50 group-hover:bg-neon-cyan/30 transition-colors">
+                    <Icon name="Mail" size={24} className="text-neon-cyan" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">Email</p>
+                    <a href="mailto:sergeevich@example.com" className="text-xl text-white hover:text-neon-cyan transition-colors">
+                      sergeevich@example.com
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 group hover:translate-x-2 transition-transform duration-300">
+                  <div className="p-3 bg-neon-magenta/20 rounded-lg border border-neon-magenta/50 group-hover:bg-neon-magenta/30 transition-colors">
+                    <Icon name="Phone" size={24} className="text-neon-magenta" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">Телефон</p>
+                    <a href="tel:+79991234567" className="text-xl text-white hover:text-neon-magenta transition-colors">
+                      +7 (999) 123-45-67
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 group hover:translate-x-2 transition-transform duration-300">
+                  <div className="p-3 bg-neon-purple/20 rounded-lg border border-neon-purple/50 group-hover:bg-neon-purple/30 transition-colors">
+                    <Icon name="MapPin" size={24} className="text-neon-purple" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">Локация</p>
+                    <p className="text-xl text-white">Москва, Россия</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2 text-neon-cyan">Email</label>
-                <Input
-                  type="email"
-                  placeholder="ivan@example.com"
-                  className="bg-black/50 border-neon-cyan/30 focus:border-neon-cyan text-white placeholder:text-gray-500"
-                />
+              <div className="mt-10 pt-8 border-t border-neon-cyan/20">
+                <p className="text-gray-400 text-sm uppercase tracking-wider mb-4">Соцсети</p>
+                <div className="flex gap-4">
+                  <a href="https://instagram.com/sergeevich" target="_blank" rel="noopener noreferrer" className="p-4 bg-gradient-to-br from-neon-cyan/20 to-neon-magenta/20 rounded-lg border border-neon-cyan/30 hover:border-neon-magenta hover:scale-110 hover:shadow-lg hover:shadow-neon-magenta/50 transition-all duration-300">
+                    <Icon name="Instagram" size={28} className="text-neon-magenta" />
+                  </a>
+                  <a href="https://t.me/sergeevich" target="_blank" rel="noopener noreferrer" className="p-4 bg-gradient-to-br from-neon-purple/20 to-neon-cyan/20 rounded-lg border border-neon-purple/30 hover:border-neon-cyan hover:scale-110 hover:shadow-lg hover:shadow-neon-cyan/50 transition-all duration-300">
+                    <Icon name="Send" size={28} className="text-neon-cyan" />
+                  </a>
+                  <a href="https://linkedin.com/in/sergeevich" target="_blank" rel="noopener noreferrer" className="p-4 bg-gradient-to-br from-neon-magenta/20 to-neon-purple/20 rounded-lg border border-neon-magenta/30 hover:border-neon-purple hover:scale-110 hover:shadow-lg hover:shadow-neon-purple/50 transition-all duration-300">
+                    <Icon name="Linkedin" size={28} className="text-neon-purple" />
+                  </a>
+                  <a href="https://behance.net/sergeevich" target="_blank" rel="noopener noreferrer" className="p-4 bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 rounded-lg border border-neon-cyan/30 hover:border-neon-purple hover:scale-110 hover:shadow-lg hover:shadow-neon-cyan/50 transition-all duration-300">
+                    <Icon name="Palette" size={28} className="text-neon-cyan" />
+                  </a>
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2 text-neon-cyan">Сообщение</label>
-                <Textarea
-                  placeholder="Расскажите о вашем проекте..."
-                  rows={6}
-                  className="bg-black/50 border-neon-cyan/30 focus:border-neon-cyan text-white placeholder:text-gray-500"
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full bg-gradient-to-r from-neon-cyan to-neon-magenta hover:shadow-2xl hover:shadow-neon-cyan/50 transition-all duration-300 text-lg py-6"
-              >
-                <Icon name="Send" size={20} className="mr-2" />
-                Отправить сообщение
-              </Button>
-            </form>
-            <div className="mt-12 flex justify-center gap-6">
-              <Button variant="outline" size="icon" className="border-neon-cyan/30 hover:border-neon-cyan hover:bg-neon-cyan/10">
-                <Icon name="Mail" size={24} />
-              </Button>
-              <Button variant="outline" size="icon" className="border-neon-cyan/30 hover:border-neon-cyan hover:bg-neon-cyan/10">
-                <Icon name="Instagram" size={24} />
-              </Button>
-              <Button variant="outline" size="icon" className="border-neon-cyan/30 hover:border-neon-cyan hover:bg-neon-cyan/10">
-                <Icon name="Linkedin" size={24} />
-              </Button>
-            </div>
-          </Card>
+            </Card>
+            <Card className="bg-gradient-to-br from-neon-magenta/10 via-card/50 to-neon-cyan/10 backdrop-blur-sm border-neon-magenta/50 p-8 hover:border-neon-cyan transition-all duration-500 hover:shadow-2xl hover:shadow-neon-magenta/30">
+              <h3 className="text-3xl font-bold mb-6 gradient-text">Обсудить проект</h3>
+              <form className="space-y-5">
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-neon-cyan uppercase tracking-wider">Ваше имя</label>
+                  <Input
+                    type="text"
+                    placeholder="Иван Иванов"
+                    className="bg-black/50 border-neon-cyan/40 focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/50 text-white placeholder:text-gray-500 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-neon-magenta uppercase tracking-wider">Email</label>
+                  <Input
+                    type="email"
+                    placeholder="ivan@example.com"
+                    className="bg-black/50 border-neon-magenta/40 focus:border-neon-magenta focus:ring-2 focus:ring-neon-magenta/50 text-white placeholder:text-gray-500 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-neon-purple uppercase tracking-wider">Сообщение</label>
+                  <Textarea
+                    placeholder="Расскажите о вашем проекте..."
+                    rows={5}
+                    className="bg-black/50 border-neon-purple/40 focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/50 text-white placeholder:text-gray-500 transition-all resize-none"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-neon-cyan via-neon-magenta to-neon-purple hover:shadow-2xl hover:shadow-neon-magenta/70 transition-all duration-300 text-lg py-6 font-bold hover:scale-105 neon-border border border-neon-magenta"
+                >
+                  <Icon name="Send" size={20} className="mr-2" />
+                  Отправить сообщение
+                </Button>
+              </form>
+            </Card>
+          </div>
         </div>
       </section>
 
